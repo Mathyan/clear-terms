@@ -1,0 +1,81 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Compiled output
+/dist/
+/tmp/
+/out-tsc/
+/bazel-out/
+
+# Bundle
+**/*.d.ts
+**/*.js
+
+# TypeScript build info
+*.tsbuildinfo
+
+# IDEs and Editors
+.idea/
+.vscode/
+**/.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.c9/
+*.launch
+*.code-workspace
+*.sublime-workspace
+.devcontainer/
+.project
+.classpath
+.settings/
+.awcache
+
+# Vim swap files
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Misc files
+.DS_Store
+Thumbs.db
+lerna-debug.log
+npm-debug.log
+yarn-error.log
+**/npm-debug.log
+.npmrc
+pnpm-lock.yaml
+/connect.lock
+/libpeerconnection.log
+testem.log
+/typings
+/**/.npmignore
+/**/LICENSE
+
+# Cache files
+/.angular/cache
+.sass-cache/
+/tmp/
+
+# Log files
+*.log
+
+# Coverage
+/coverage/
+.nyc_output/
+/benchmarks/memory
+/build/config.gypi
+
+# Example and Test directories
+/quick-start/
+/example_dist/
+/example/
+/test/
+/benchmarks/memory/
+
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.

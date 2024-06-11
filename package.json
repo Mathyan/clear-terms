@@ -1,0 +1,13 @@
+{
+  "name": "clear_terms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd frontend && ng serve\" \"cd backend && npm run start\"",
+    "install": "cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
