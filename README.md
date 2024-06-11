@@ -1,11 +1,8 @@
 # ClearTerms
 
-## Table of Contents
-
 <!--toc:start-->
 
 - [ClearTerms](#clearterms)
-  - [Table of Contents](#table-of-contents)
   - [Project Description](#project-description)
   - [Technologies](#technologies)
   - [Getting Started](#getting-started)
@@ -41,7 +38,7 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository**
 
    ```bash
-   git clone https://
+   git clone https://github.com/Mathyan/clear-terms.git
    cd ClearTerms
    ```
 
@@ -58,7 +55,7 @@ Before you begin, ensure you have the following installed:
    From the root of your project directory, run the following command to start both the frontend and backend servers:
 
    ```bash
-   npm start
+   npm run start
    ```
 
    This command uses `concurrently` to run both servers. The frontend will be available at `http://localhost:4200` and the backend at `http://localhost:3000`.
