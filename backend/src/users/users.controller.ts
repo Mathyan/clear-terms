@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   ParseIntPipe,
   Post,
@@ -33,9 +35,25 @@ export class UsersController {
   async createUser(
     @Body(new ZodValidationPipe(CreateUserSchema)) createUserDto: CreateUserDto,
   ) {
-    console.log(createUserDto);
-    return this.usersService.createUser(
-      createUserDto as Prisma.UserUncheckedCreateWithoutServiceReviewInput,
-    );
+    try {
+      const createdUser = await this.usersService.createUser(
+        createUserDto as Prisma.UserCreateInput,
+      );
+      return createdUser;
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          // Unique constraint failed
+          throw new HttpException(
+            'User with this email or username already exists',
+            HttpStatus.CONFLICT,
+          );
+        }
+      }
+      throw new HttpException(
+        'Internal server error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
