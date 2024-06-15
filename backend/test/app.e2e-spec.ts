@@ -21,4 +21,31 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+  it('should add, get and delete a user', async () => {
+    // Add a user
+    const createUserResponse = await request(app.getHttpServer())
+      .post('/users')
+      .send({ name: 'test', email: 'test@test.com', password: 'test' })
+      .expect(201);
+
+    const userId = createUserResponse.body.id;
+
+    // Get the user
+    await request(app.getHttpServer())
+      .get(`/users/${userId}`)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body).toMatchObject({
+          id: userId,
+          name: 'test',
+          email: 'test@test.com',
+        });
+      });
+
+    // Delete the user
+    await request(app.getHttpServer()).delete(`/users/${userId}`).expect(200);
+
+    // Verify the user is deleted
+    await request(app.getHttpServer()).get(`/users/${userId}`).expect(404);
+  });
 });
