@@ -37,6 +37,7 @@ export class UsersController {
   async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.usersService.getUser({ id: id });
   }
+
   @Post()
   async createUser(
     @Body(new ZodValidationPipe(CreateUserSchema)) createUserDto: CreateUserDto,

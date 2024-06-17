@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { User, Prisma } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
 import { PaginationDto } from 'src/dto/pagination.dto';
+import { Crypt } from 'src/crypt/crypt';
 
 @Injectable()
 export class UsersService {
-  private readonly saltRounds = 10;
-  constructor(private prism: PrismaService) {}
+  private crypt: Crypt;
+  constructor(private prism: PrismaService) {
+    this.crypt = new Crypt();
+  }
 
   async getUser(
     userWhereUniquInput: Prisma.UserWhereUniqueInput,
@@ -66,9 +68,7 @@ export class UsersService {
     data: Prisma.UserUncheckedCreateWithoutServiceReviewInput,
   ): Promise<User> {
     data.role = 1;
-    const salt = await bcrypt.genSalt(this.saltRounds);
-    const hash = await bcrypt.hash(data.password, salt);
-    data.password = hash;
+    data.password = await this.crypt.passwordHash(data.password);
     return this.prism.user.create({
       data,
     });
