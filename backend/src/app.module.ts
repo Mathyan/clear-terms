@@ -11,15 +11,16 @@ import { PasswordStripInterceptor } from './password-strip/password-strip.interc
 @Module({
   imports: [UsersModule, ReviewsModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService,
-  {
-    provide: APP_GUARD,
-    useClass: JwtAuthGuard,
-  },
-  {
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
       provide: APP_INTERCEPTOR,
       useClass: PasswordStripInterceptor,
-  },
+    },
   ],
 })
 export class AppModule {}

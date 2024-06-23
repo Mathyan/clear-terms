@@ -28,7 +28,7 @@ export class UsersService {
       return this.prism.user.findMany();
     }
 
-    let parms: any = {
+    const parms: any = {
       skip: paginationDto.skip,
       take: paginationDto.take,
       where: null,
@@ -86,7 +86,7 @@ export class UsersService {
   }
 
   async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
-    let user = await this.getUser(where);
+    const user = await this.getUser(where);
     if (user) {
       console.log(where);
       return this.prism.user.delete({

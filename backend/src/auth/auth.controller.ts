@@ -6,11 +6,11 @@ import { Public } from 'src/public-metadata/public-metadata.decorator';
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
-  
+
   @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async signIn(@Request() req:any):Promise<{access_token:string}>{
+  async signIn(@Request() req: any): Promise<{ access_token: string }> {
     return this.authService.login(req.user);
   }
 }

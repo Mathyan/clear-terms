@@ -19,7 +19,7 @@ import { JwtStrategy } from './jwt.strategy';
     }),
     PassportModule,
   ],
-  providers: [AuthService, Crypt, LocalStrategy , JwtStrategy],
+  providers: [AuthService, Crypt, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })
