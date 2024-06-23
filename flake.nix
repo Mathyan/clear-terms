@@ -27,7 +27,7 @@
           nativeBuildInputs = [ pkgs.bashInteractive ];
           buildInputs = with pkgs; [
             nodePackages.prisma
-            nodePackages.openssl
+            openssl
             prettierd
             postman
           ];
