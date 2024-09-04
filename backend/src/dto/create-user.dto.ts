@@ -16,7 +16,7 @@ export const CreateUserSchema = z
     },
     {
       message: 'Name is set to username if not provided',
-      path: ['name'], // path of the error
+      path: ['name'],
     },
   );
 

@@ -30,6 +30,7 @@
             openssl
             prettierd
             postman
+            vscode
           ];
           shellHook = with pkgs; ''
             export PRISMA_QUERY_ENGINE_BINARY="${prisma-engines}/bin/query-engine"
