@@ -69,7 +69,7 @@ export class UsersController {
   @Delete(':id')
   async deleteUser(
     @Param('id', ParseIntPipe) id: number,
-    @Req() context,
+    @Req() context: any,
   ): Promise<User> {
     if (context.user.role === Role.User && context.user.id !== id) {
       throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);

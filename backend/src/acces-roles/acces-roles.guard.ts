@@ -32,7 +32,11 @@ export class AccesRolesGuard implements CanActivate {
 
   private insertRoleIntoRequest(role: Role, context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
-    request.user.role = role;
+    console.log('Current role: ', request.user.role);
+    if (!(request.user.role === Role.Admin)) {
+      console.log('Changing role to: ', role);
+      request.user.role = role;
+    }
   }
 
   private jwtUnpack(context: ExecutionContext): Role {

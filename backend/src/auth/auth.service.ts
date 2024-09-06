@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 import { Role } from 'src/acces-roles/role.enum';
 import { Crypt } from 'src/crypt/crypt';
 import { UsersService } from 'src/users/users.service';
@@ -22,9 +23,9 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any): Promise<{ access_token: string }> {
+  async login(user: any, res: Response): Promise<void> {
     let role = Role.User;
-    if (user.admin == 2) {
+    if (user.role == 2) {
       role = Role.Admin;
     }
     const payload = {
@@ -34,8 +35,14 @@ export class AuthService {
       name: user.name,
       role: role,
     };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+
+    const token = this.jwtService.sign(payload);
+
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 3600000,
+    });
   }
 }
