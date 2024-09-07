@@ -40,11 +40,10 @@ export class AccesRolesGuard implements CanActivate {
   }
 
   private jwtUnpack(context: ExecutionContext): Role {
-    const { rawHeaders } = context.switchToHttp().getRequest();
-    const jwt = rawHeaders[rawHeaders.indexOf('Authorization') + 1];
-    const jwtPayload = jwt.split(' ')[1];
+    const request = context.switchToHttp().getRequest();
+    const jwt = request.cookies['jwt'];
     const secret = process.env.JWT_SECRET;
-    const jwtPayloadDecoded = this.jwtService.verify(jwtPayload, { secret });
+    const jwtPayloadDecoded = this.jwtService.verify(jwt, { secret });
     const { role } = jwtPayloadDecoded;
     return role;
   }

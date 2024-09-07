@@ -72,21 +72,18 @@ export class ReviewsController {
     @Req() context: any,
     @Param('id', ParseIntPipe) id: number,
   ) {
-    console.log('Role: ', context.user.role);
-
-    console.log(
-      'Second condition: ',
-      await this.reviewsService
-        .getReview({ id: id })
-        .then((review) => review.userId === context.user.id),
-    );
     if (
       context.user.role === Role.Admin ||
       (await this.reviewsService
         .getReview({ id: id })
         .then((review) => review.userId === context.user.id))
     ) {
-      return this.reviewsService.deleteReview(id);
+      return this.reviewsService.deleteReview(id).catch(() => {
+        throw new HttpException(
+          `Review id ${id} not found`,
+          HttpStatus.NOT_FOUND,
+        );
+      });
     }
     throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }

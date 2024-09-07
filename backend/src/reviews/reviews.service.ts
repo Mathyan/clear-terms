@@ -6,10 +6,6 @@ import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class ReviewsService {
-  async deleteReview(id: number): Promise<ServiceReview | null> {
-    console.log('Delete review id: ', id);
-    return this.prism.serviceReview.delete({ where: { id: id } });
-  }
   constructor(private prism: PrismaService) {}
   async getReview(
     reviewWhereUniqueImput: Prisma.ServiceReviewWhereUniqueInput,
@@ -17,6 +13,13 @@ export class ReviewsService {
     return await this.prism.serviceReview.findUnique({
       where: reviewWhereUniqueImput,
     });
+  }
+
+  async deleteReview(id: number): Promise<ServiceReview | null> {
+    return this.prism.serviceReview.delete({ where: { id: id } });
+    // .catch(() => {
+    //   throw new Error('Review not found');
+    // });
   }
 
   async getReviews(
