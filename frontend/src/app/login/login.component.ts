@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { UserService } from '../user.service';
+import { HttpResponse } from '@angular/common/http';
+import { AppResponse } from '../app-response';
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule],
+  providers: [UserService],
   template: `
     <div class="flex justify-center items-center h-screen">
       <div class="bg-white p-8 rounded shadow-md w-96">
@@ -44,7 +47,6 @@ import { FormsModule } from '@angular/forms';
             >
               Login
             </button>
-            <a href="#" class="text-indigo-500">Forgot password?</a>
           </div>
         </form>
       </div>
@@ -52,9 +54,19 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class LoginComponent {
+  constructor(private userService: UserService) {}
   email = '';
   password = '';
   login() {
-    return;
+    this.userService.login(this.email, this.password).subscribe({
+      next: (response: HttpResponse<AppResponse>): void => {
+        if (response.status === 200 && response.body) {
+          console.log(response.body.message, response.body.status);
+        }
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+      },
+    });
   }
 }

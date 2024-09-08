@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BackendSet } from './backend-set';
+import { AppResponse } from './app-response';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +12,18 @@ export class UserService {
     private http: HttpClient,
     private backendSet: BackendSet,
   ) {}
-  private jwtToken: string | null = null;
-  public login(email: string, password: string) {
-    try {
-      this.http.post(`${this.backendSet}/auth/login`, `${}` );
-    } catch (error) {}
-  }
-  public logout() {
-    this.jwtToken = null;
+
+  public login(
+    email: string,
+    password: string,
+  ): Observable<HttpResponse<AppResponse>> {
+    return this.http.post<AppResponse>(
+      `${this.backendSet.getBackend()}/auth/login`,
+      { email, password },
+      {
+        observe: 'response',
+        withCredentials: true,
+      },
+    );
   }
 }

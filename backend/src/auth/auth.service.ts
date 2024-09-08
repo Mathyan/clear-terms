@@ -12,8 +12,8 @@ export class AuthService {
     private crypt: Crypt,
     private jwtService: JwtService,
   ) {}
-  async validateUser(username: string, password: string) {
-    const user = await this.userService.getUser({ username: username });
+  async validateUser(email: string, password: string) {
+    const user = await this.userService.getUser({ email: email });
 
     if (user && (await this.crypt.passwordCompare(password, user.password))) {
       const { password: _password, ...result } = user;
@@ -41,7 +41,7 @@ export class AuthService {
     res.cookie('jwt', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      sameSite: 'none',
       maxAge: 3600000,
     });
   }
