@@ -12,6 +12,9 @@ node_modules/
 # Bundle
 **/*.d.ts
 **/*.js
+!.eslintrc.js
+!eslint.config.js
+!tailwind.config.js
 
 # TypeScript build info
 *.tsbuildinfo
