@@ -11,6 +11,7 @@ import { AccesRolesGuard } from './acces-roles/acces-roles.guard';
 import { AccesRolesModule } from './acces-roles/acces-roles.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -30,6 +31,9 @@ import { join } from 'path';
     ReviewsModule,
     AuthModule,
     AccesRolesModule,
+    ConfigModule.forRoot({
+      isGlobal: true, // Make ConfigService globally available
+    }),
   ],
   controllers: [AppController],
   providers: [
