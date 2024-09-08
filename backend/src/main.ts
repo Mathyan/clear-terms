@@ -19,7 +19,7 @@ async function bootstrap() {
     };
 
     const httpsApp = await NestFactory.create(AppModule, { httpsOptions });
-    await httpsApp.listen(443, '0.0.0.0');
+    await httpsApp.listen(3000, '0.0.0.0');
     console.log(`Application is running on HTTPS: ${await httpsApp.getUrl()}`);
   } else {
     await app.listen(3000, '0.0.0.0');
