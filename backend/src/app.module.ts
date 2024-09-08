@@ -9,9 +9,28 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { PasswordStripInterceptor } from './password-strip/password-strip.interceptor';
 import { AccesRolesGuard } from './acces-roles/acces-roles.guard';
 import { AccesRolesModule } from './acces-roles/acces-roles.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [UsersModule, ReviewsModule, AuthModule, AccesRolesModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(
+        __dirname,
+        '..',
+        '..',
+        'frontend',
+        'dist',
+        'frontend',
+        'browser',
+      ),
+      exclude: ['/api*'],
+    }),
+    UsersModule,
+    ReviewsModule,
+    AuthModule,
+    AccesRolesModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

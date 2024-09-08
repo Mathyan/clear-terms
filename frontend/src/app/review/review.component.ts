@@ -4,9 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-review',
   standalone: true,
   imports: [],
-  templateUrl: './review.component.html',
-  styleUrl: './review.component.css'
+  template: './review.component.html',
 })
-export class ReviewComponent {
-
-}
+export class ReviewComponent {}

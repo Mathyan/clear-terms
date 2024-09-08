@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd frontend && npx ng serve\" \"cd backend && npm run start:debug\"",
+    "build:frontend": "cd frontend && npm run build",
+    "start:debug": "concurrently \"cd frontend && npx ng build --watch\" \"cd backend && npm run start:debug\"",
+    "start": "npm run build:frontend && cd backend && npm run start",
     "install": "cd frontend && npm install && cd ../backend && npm install"
   },
   "dependencies": {
