@@ -32,7 +32,7 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     AccesRolesModule,
     ConfigModule.forRoot({
-      isGlobal: true, // Make ConfigService globally available
+      isGlobal: true,
     }),
   ],
   controllers: [AppController],
