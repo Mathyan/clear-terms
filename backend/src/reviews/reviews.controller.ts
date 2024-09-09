@@ -58,6 +58,7 @@ export class ReviewsController {
     createReviewDto: CreateReviewSchemaDto,
     @Req() context: any,
   ) {
+    console.log(createReviewDto);
     return this.reviewsService.createReview(
       await this.userService
         .getUser({ id: context.user.id })

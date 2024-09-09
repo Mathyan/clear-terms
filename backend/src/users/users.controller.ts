@@ -19,6 +19,7 @@ import { PaginationDto, PaginationSchema } from 'src/dto/pagination.dto';
 import { ZodValidationPipe } from 'src/zod.validation.pipe';
 import { UsersService } from './users.service';
 import { ModifyUserDto, ModifyUserSchema } from 'src/dto/modify-user.dto';
+import { Public } from 'src/public-metadata/public-metadata.decorator';
 
 @Controller('users')
 export class UsersController {
@@ -34,11 +35,19 @@ export class UsersController {
     return this.usersService.getUsers(paginationDto);
   }
 
+  @Get('me')
+  @AccesRoles(Role.Admin, Role.User)
+  async getMe(@Req() context: any): Promise<User> {
+    console.log('Context: ', context.user);
+    return this.usersService.getUser({ id: context.user.id });
+  }
+
   @Get(':id')
+  @AccesRoles(Role.Admin, Role.User)
   async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.usersService.getUser({ id: id });
   }
-
+  @Public()
   @Post('create')
   async createUser(
     @Body(new ZodValidationPipe(CreateUserSchema)) createUserDto: CreateUserDto,
@@ -93,10 +102,10 @@ export class UsersController {
   @Post('modify')
   async changeUserData(
     @Body(new ZodValidationPipe(ModifyUserSchema)) modifyUserDto: ModifyUserDto,
+    @Req() context: any,
   ): Promise<User> {
     console.log(modifyUserDto);
-    const id = modifyUserDto.id;
-    delete modifyUserDto.id;
+    const id = context.user.id;
     try {
       return this.usersService.updateUser({
         where: { id: id },

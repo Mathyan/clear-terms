@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
 import { HttpResponse } from '@angular/common/http';
-import { AppResponse } from '../app-response';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -47,6 +47,12 @@ import { AppResponse } from '../app-response';
             >
               Login
             </button>
+            <button
+              class="bg-green-600 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              (click)="register()"
+            >
+              Register
+            </button>
           </div>
         </form>
       </div>
@@ -54,19 +60,29 @@ import { AppResponse } from '../app-response';
   `,
 })
 export class LoginComponent {
-  constructor(private userService: UserService) {}
   email = '';
   password = '';
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
+
   login() {
     this.userService.login(this.email, this.password).subscribe({
-      next: (response: HttpResponse<AppResponse>): void => {
+      next: (response: HttpResponse<string>): void => {
         if (response.status === 200 && response.body) {
-          console.log(response.body.message, response.body.status);
+          console.log('Login successful', response.body);
+          this.router.navigate(['/']);
         }
       },
       error: (err) => {
         console.error('Login failed', err);
       },
     });
+  }
+
+  register() {
+    this.router.navigate(['/user/register']);
   }
 }

@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
   imports: [ReviewItemComponent, CommonModule],
   template: `
     <div class="container mx-auto">
-      <h1 class="text-3xl font-bold mb-4">Reviews</h1>
       <div *ngIf="reviewsList.length > 0; else noReviews">
         <app-review-item
           *ngFor="let review of reviewsList"
