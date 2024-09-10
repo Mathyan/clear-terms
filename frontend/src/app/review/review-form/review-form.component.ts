@@ -16,7 +16,6 @@ import { ReviewService } from '../../review.service';
   template: `
     <div class="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg">
       <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
-        <!-- Title Input -->
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-bold mb-2"
             >Title</label
@@ -40,7 +39,6 @@ import { ReviewService } from '../../review.service';
           </div>
         </div>
 
-        <!-- Content Textarea -->
         <div class="mb-4">
           <label for="content" class="block text-gray-700 font-bold mb-2"
             >Content</label
@@ -59,12 +57,11 @@ import { ReviewService } from '../../review.service';
             "
           >
             <p class="text-red-500 text-sm">
-              Content is required and must be less 100 characters.
+              Content is required and must be less 500 characters.
             </p>
           </div>
         </div>
 
-        <!-- Submit Button -->
         <div class="text-right">
           <button
             type="submit"
@@ -96,7 +93,7 @@ export class ReviewFormComponent {
   ) {
     this.reviewForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
-      content: ['', [Validators.required, Validators.maxLength(100)]],
+      content: ['', [Validators.required, Validators.maxLength(500)]],
     });
   }
 
