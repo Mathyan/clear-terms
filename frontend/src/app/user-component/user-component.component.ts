@@ -49,7 +49,6 @@ import { CommonModule } from '@angular/common';
           />
         </div>
 
-        <!-- Name Input -->
         <div class="mb-4">
           <label for="name" class="block text-gray-700 font-bold mb-2"
             >Name</label
@@ -64,10 +63,17 @@ import { CommonModule } from '@angular/common';
         </div>
 
         <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2">Role</label>
-          <p class="text-gray-800">
-            {{ userForm.get('role')?.value === 2 ? 'Admin' : 'User' }}
-          </p>
+          <label for="role" class="block text-gray-700 font-bold mb-2"
+            >Role</label
+          >
+          <select
+            id="role"
+            formControlName="role"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          >
+            <option value="1">User</option>
+            <option value="2">Admin</option>
+          </select>
         </div>
 
         <div class="text-right">
@@ -116,16 +122,19 @@ export class UserComponent implements OnInit {
 
       const confirmMessage = `
         Are you sure you want to change:
-        - Username: ${this.user.username} → ${updatedUser.username}
-        - Email: ${this.user.email} → ${updatedUser.email}
-        - Name: ${this.user.name} → ${updatedUser.name}
+        - Username: ${this.user.username} -> ${updatedUser.username}
+        - Email: ${this.user.email} -> ${updatedUser.email}
+        - Name: ${this.user.name} -> ${updatedUser.name}
+        - Role: ${this.user.role === 1 ? 'User' : 'Admin'} -> ${
+          (updatedUser.role as number) === 1 ? 'User' : 'Admin'
+        }?
       `;
       updatedUser.id = this.user.id;
       if (confirm(confirmMessage)) {
         this.userService.updateUser(updatedUser).subscribe({
           next: () => {
             alert('User updated successfully');
-            this.router.navigate(['/user']);
+            this.router.navigate(['/']);
           },
           error: () => {
             alert('Failed to update user');
