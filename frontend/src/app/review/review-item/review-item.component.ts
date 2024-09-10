@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ReviewService } from '../../review.service';
 import { Review } from '../../review';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review-item',
@@ -30,7 +31,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ReviewItemComponent {
   @Input() review: Review = {} as Review;
+  constructor(private router: Router) {}
   goToReviewDetail(id: number): void {
-    console.log('Review ID:', id);
+    this.router.navigate(['/reviews', id]);
   }
 }

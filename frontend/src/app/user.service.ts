@@ -29,6 +29,23 @@ export class UserService {
     );
   }
 
+  public getUserById(userId: number): Observable<User> {
+    return this.http.get<User>(`/api/users/${userId}`, {
+      withCredentials: true,
+    });
+  }
+
+  public logout(): Observable<HttpResponse<string>> {
+    return this.http.post<string>(
+      `/api/auth/logout`,
+      {},
+      {
+        observe: 'response',
+        withCredentials: true,
+      },
+    );
+  }
+
   public getUser(): Observable<User> {
     return this.http.get<User>(`/api/users/me`, {
       withCredentials: true,

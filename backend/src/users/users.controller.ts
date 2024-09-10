@@ -43,8 +43,9 @@ export class UsersController {
   }
 
   @Get(':id')
-  @AccesRoles(Role.Admin, Role.User)
+  @Public()
   async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
+    console.log('Id: ', id);
     return this.usersService.getUser({ id: id });
   }
   @Public()

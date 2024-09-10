@@ -11,10 +11,13 @@ export class ReviewService {
   public getReviews(): Observable<Review[]> {
     return this.http.get<Review[]>('/api/reviews');
   }
+  public getReviewById(id: number): Observable<Review> {
+    return this.http.get<Review>(`/api/reviews/${id}`);
+  }
   public createReview(review: object): Observable<object> {
     return this.http.post('/api/reviews', review, { withCredentials: true });
   }
-  public deleteReview(id: string): Observable<object> {
+  public deleteReview(id: number): Observable<object> {
     return this.http.delete(`/api/reviews/${id}`);
   }
 }

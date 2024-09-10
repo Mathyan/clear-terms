@@ -16,4 +16,10 @@ export class AuthController {
 
     res.status(200).json({ message: 'Login successful' });
   }
+
+  @Post('logout')
+  async signOut(@Res() res: Response): Promise<void> {
+    res.clearCookie('jwt');
+    res.status(200).json({ message: 'Logout successful' });
+  }
 }

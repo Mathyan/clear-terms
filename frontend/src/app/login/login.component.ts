@@ -62,6 +62,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
+  isUserLoggedIn = false;
 
   constructor(
     private userService: UserService,
