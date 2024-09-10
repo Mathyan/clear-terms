@@ -55,11 +55,25 @@ Before you begin, ensure you have the following installed:
    From the root of your project directory, run the following command to start both the frontend and backend servers:
 
    ```bash
+   npm run start:debug
+   ```
+
+   This command uses `concurrently` to run both servers. Both servers are accessed trough NestJS.
+
+2. **Access the Application**
+   Open your browser and navigate to `http://localhost:3000/` to access the application.
+   Backend is too accessible at `http://localhost:3000/api`.
+
+### Serving the Application
+
+1. **Building and starting the Application**
+   To build the application, run the following command:
+
+   ```bash
    npm run start
    ```
 
-   This command uses `concurrently` to run both servers. The frontend will be available at `http://localhost:4200` and the backend at `http://localhost:3000`.
+   The build artifacts will be stored in the `dist/` directory.
 
-## Access the Application
-
-Visit `http://localhost:4200` in your web browser to interact with the ClearTerms application.
+2. **Access the Application**
+   Application is served at `http://localhost:3000/` for further proxing.
