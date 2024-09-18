@@ -5,11 +5,7 @@
 - [ClearTerms](#clearterms)
   - [Project Description](#project-description)
   - [Technologies](#technologies)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Running the Application](#running-the-application)
-  - [Access the Application](#access-the-application)
+  - [Getting Started](#getting-started) - [Prerequisites](#prerequisites) - [Installation](#installation) - [Running the Application](#running-the-application) - [Serving the Application](#serving-the-application)
   <!--toc:end-->
 
 ## Project Description
@@ -20,6 +16,7 @@ ClearTerms is designed to simplify and summarize the licenses and terms of servi
 
 - **Backend**: NestJS
 - **Frontend**: Angular
+- **Database**: SQLite managed by Prisma
 
 ## Getting Started
 
@@ -47,6 +44,16 @@ Before you begin, ensure you have the following installed:
 
    ```bash
    npm run install
+   ```
+
+3. **Set up the Environment Variables**
+   Copy the `.env.template` file to `.env` and fill in the required environment variables.
+
+4. **Set up the Database**
+   To initialize the database, run the following command:
+
+   ```bash
+   npx prisma migrate dev --name init
    ```
 
 ### Running the Application
